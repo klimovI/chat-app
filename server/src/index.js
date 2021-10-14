@@ -5,8 +5,8 @@ const mongoose = require('mongoose');
 const http = require('http');
 const cors = require('cors');
 const randomWords = require('random-words');
-const Chat = require('./src/models/Chat');
-const Message = require('./src/models/Message');
+const Chat = require('./models/Chat');
+const Message = require('./models/Message');
 
 let chats = [];
 
