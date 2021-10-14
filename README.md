@@ -1,7 +1,7 @@
 ## Setup
-- `npm install` in client/
-- `npm install` in server/
+- `npm install` in client/ folder
+- `npm install` in server/ folder
 
 ## Starting
-- `npm start` in client/
-- `npm start` in server/
+- `npm start` in client/ folder
+- `npm start` in server/ folder
