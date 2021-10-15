@@ -6,4 +6,4 @@
 ## Starting
 - Run `npm start` in `client/` folder
 - Run `npm start` in `server/` folder
-- Open `http://localhost:3000/` in a browser
+- Open the [App](http://localhost:3000/)
