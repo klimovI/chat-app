@@ -1,7 +1,9 @@
 ## Setup
-- `npm install` in client/ folder
-- `npm install` in server/ folder
+- Run `npm install` in `client/` folder
+- Run `npm install` in `server/` folder
+- Set `MONGODB_URL` variable in `server/.env` file
 
 ## Starting
-- `npm start` in client/ folder
-- `npm start` in server/ folder
+- Run `npm start` in `client/` folder
+- Run `npm start` in `server/` folder
+- Open `http://localhost:3000/` in a browser
