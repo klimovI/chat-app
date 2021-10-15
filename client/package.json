@@ -13,12 +13,6 @@
     "socket.io": "^4.3.0",
     "socket.io-client": "^4.3.0"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",

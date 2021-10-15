@@ -22,9 +22,9 @@ const Chat = () => {
 
   useEffect(() => {
     const user = localStorage.getItem('user');
-    if (!user) return history.push(`/?chat=${chatID}`);
 
-    socket.connect();
+    // Redirect to 'Join' page if the user name is't set
+    if (!user) return history.push(`/?chat=${chatID}`);
   
     axios
       .get(`http://localhost:3001/chat/${chatID}`)
