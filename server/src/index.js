@@ -79,12 +79,13 @@ io.on('connection', socket => {
   });
 
   
-  socket.on('message', (message, callback) => {
+  socket.on('message', async (message, callback) => {
     // Save message to the database
-    new Message({ ...message, chatID }).save();
+    const newMessage = new Message({ ...message, chatID });
+    const savedMessage = await newMessage.save();
     
     // Notify all socket users in this chat about a new message
-    io.to(chatID).emit('message', message);
+    io.to(chatID).emit('message', savedMessage);
     
     callback();
   });
