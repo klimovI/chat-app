@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
+import Chats from '../../components/chats';
+import Messages from '../../components/messages';
+import Users from '../../components/users';
+
 import axios from 'axios';
 import socket from '../../socket';
-
 
 import './style.css';
 
@@ -26,19 +29,17 @@ const Chat = () => {
     axios
       .get(`http://localhost:3001/chat/${chatID}`)
       .then(({ data }) => {
+        // Redirect to 'Join' page if a chart with chatID doesn't exist
         if (!data) return history.push('/');
 
         setMessages(data);
+
         socket.emit('join', { chatID, user });
 
+        socket.on('setChats', setChats);
+        socket.on('setUsers', setUsers);
         socket.on('message', message => {
           setMessages(prev => [...prev, message]);
-        });
-
-        socket.on('setChats', setChats);
-  
-        socket.on('setUsers', newUsers => {
-          setUsers([...new Set(newUsers)]);
         });
       });
 
@@ -49,60 +50,12 @@ const Chat = () => {
     }
   }, [chatID]);
 
-  const sendMessage = () => {
-    if (message) {
-      const user = localStorage.getItem('user');
-      socket.emit('message', { user, text: message }, () => setMessage(''));
-    }
-  }
-
-  const changeChat = id => {
-    socket.emit('leave');
-
-    history.push(`/chat/${id}`)
-  }
-
   return (
     <main>
-      <div className="chatBlock">
-        <div className="chatsBlock">
-          <h1 className="chatBlockTitle">Chats</h1>
-          <div className="chats">
-            {chats.map(({ _id, name }, i) => (
-              <div
-                key={i}
-                className={`chat ${_id === chatID && 'highlight'}` }
-                onClick={() => changeChat(_id)}
-                
-              >{name}</div>
-            ))}
-          </div>
-        </div>
-        <div className="messagesBlock">
-          <h1 className="chatBlockTitle">Messages</h1>
-          <div className="messagesBody">
-            {messages.map(({ text, user }, i) => (
-              <div key={i} className="message">
-                <span className="userName">{user}:</span> {text}
-              </div>
-            ))}
-          </div>
-          <div className="footer">
-            <input
-            className="chatBlockInput"
-              value={message}
-              onChange={event => setMessage(event.target.value)}
-              onKeyPress={({ key }) => key === 'Enter' && sendMessage()}
-            ></input>
-            <button className="chatBlockButton" onClick={sendMessage}>Send</button>
-          </div>
-        </div>
-        <div className="usersBlock">
-          <h1 className="chatBlockTitle">Users</h1>          
-          {users.map((user, i) => (
-            <div key={i} className="user">{user}</div>
-          ))}
-        </div>
+      <div className="chatPage">
+        <Chats chatID={chatID} chats={chats} />
+        <Messages message={message} messages={messages} setMessage={setMessage} />
+        <Users users={users} />
       </div>
     </main>
   );

@@ -1,0 +1,14 @@
+.users {
+  width: 20%;
+  overflow: hidden;
+  margin: 20px;
+}
+
+.usersTitle {
+  text-align: center;
+  margin: 0 0 30px 0;
+}
+
+.user {
+  margin: 5px 0;
+}

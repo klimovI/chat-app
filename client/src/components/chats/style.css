@@ -1,0 +1,27 @@
+.chats {
+  width: 400px;
+  height: 100%;
+}
+
+.chatsTitle {
+  text-align: center;
+  margin: 0 0 30px 0;
+}
+
+.chatsList {
+  overflow-y: auto;
+  height: 90%;
+}
+
+.chat {
+  width: 90%;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.14);
+  border-radius: 12px;
+  padding: 5px;
+  margin: 5px auto;
+  cursor: pointer;
+}
+
+.highlight {
+  background-color: grey;
+}
